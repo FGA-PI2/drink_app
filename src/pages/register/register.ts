@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { MenuPage } from '../menu/menu'
 
 @Component({
   templateUrl: 'register.html'
@@ -24,5 +25,6 @@ export class RegisterPage {
     console.log(this.nascimento);
     console.log(this.senha);
     console.log(this.senha2);
+    this.navCtrl.push(MenuPage)
   }
 }
