@@ -1,0 +1,21 @@
+<ion-content padding="true" style="background: url(https://i.pinimg.com/originals/44/13/8b/44138beffa68ec29c49acb0aa0604138.jpg) no-repeat center;background-size:cover;" class="has-header">
+  <div>
+    <img src="https://image.ibb.co/curAE5/drink_2.png" style="display: block; width: 40%; height: auto; margin-left: auto; margin-right: auto;">
+  </div>
+  <h3 id="page1-heading1" style="color:#FFFFFF;font-style:italic;text-align:center;">PinBar!</h3>
+  <form (ngSubmit)="tryLogin()">
+    <ion-list>
+      <ion-item>
+        <ion-input [(ngModel)]="email" name="email" type="text" placeholder="E-mail:"></ion-input>
+      </ion-item>
+      <div class="spacer" style="height: 20px;"></div>
+      <ion-item>
+        <ion-input [(ngModel)]="senha" name="senha" type="password" placeholder="Senha:"></ion-input>
+      </ion-item>
+      <div class="spacer" style="height: 65px;"></div>
+      <button ion-button color="secondary" round block type="submit">Entrar</button>
+      <div class="spacer" style="height: 10px;"></div>
+      <button ion-button color="secondary" round block (click)="register()">Registrar</button>
+    </ion-list>
+  </form>
+</ion-content>

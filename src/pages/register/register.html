@@ -10,27 +10,29 @@
     <form (ngSubmit)="registerAccount()">
   <ion-item>
     <ion-label floating>Nome</ion-label>
-    <ion-input [(ngModel)]="name" name="name" type="text"></ion-input>
+    <ion-input [(ngModel)]="user.nome" name="nome" type="text"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Email</ion-label>
-    <ion-input [(ngModel)]="email" name="email" type="text"></ion-input>
+    <ion-input [(ngModel)]="user.email" name="email" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Data de Nascimemto</ion-label>
-    <ion-datetime [(ngModel)]="nascimento" name="nascimento" displayFormat="DD/MM/YY"></ion-datetime>
+    <ion-datetime [(ngModel)]="user.nascimento" name="nascimento" displayFormat="DD/MM/YY"></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Senha</ion-label>
-    <ion-input [(ngModel)]="senha" name="senha" type="password"></ion-input>
+    <ion-input [(ngModel)]="user.senha" name="senha" type="password"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Repetir Senha</ion-label>
-    <ion-input [(ngModel)]="senha2" name="senha2" type="password"></ion-input>
+    <ion-input [(ngModel)]="user.senha2" name="senha2" type="password"></ion-input>
   </ion-item>
   <button ion-button block type="submit">Criar conta</button>
 </form>
+
+
 </ion-content>

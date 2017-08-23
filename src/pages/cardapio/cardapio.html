@@ -1,0 +1,19 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cardápio</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="card-background-page">
+  <ion-list>
+
+    <ion-card *ngFor="let item of cardapio">
+      <img class="img-circle" src="{{ item.img }}" style="">
+      <div class="card-title">{{ item.nome }}</div>
+      <div class="card-subtitle">{{ item.desc }}</div>
+      <div class="card-subtitle-price">R{{ item.preco | currency : 'USD' : true}}</div>
+    </ion-card>
+  </ion-list>
+</ion-content>

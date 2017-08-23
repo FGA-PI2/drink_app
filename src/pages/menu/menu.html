@@ -1,5 +1,11 @@
-
-
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
 <ion-content>
-  <h2>oi</h2>
+  <h2>Olá {{ loggedUser.nome }}!</h2>
+  <h2>Créditos: R{{ loggedUser.creditos | currency : 'USD' : true}}!</h2>
 </ion-content>

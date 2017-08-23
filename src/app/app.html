@@ -6,9 +6,9 @@
   </ion-header>
   <ion-content padding>
     <ion-list>
-      <button menuClose ion-item *ngFor="let pagina of paginas">{{ pagina.titulo }}</button>
+      <button menuClose ion-item *ngFor="let pagina of paginas" (click)="openPage(pagina)">{{ pagina.titulo }}</button>
     </ion-list>
   </ion-content>
 </ion-menu>
 
-<ion-nav [root]="test" #content></ion-nav>
+<ion-nav [root]="rootPage" swipeBackEnabled="false" #content></ion-nav>

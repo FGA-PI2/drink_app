@@ -5,16 +5,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { MenuPage } from '../pages/menu/menu';
+import { CardapioPage } from '../pages/cardapio/cardapio';
+import { UserService } from '../domain/user/user-service';
+import { CardapioService } from '../domain/cardapio/cardapio-service';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    LoginPage,
     RegisterPage,
-    MenuPage
+    MenuPage,
+    CardapioPage
   ],
   imports: [
     BrowserModule,
@@ -23,13 +27,16 @@ import { MenuPage } from '../pages/menu/menu';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    LoginPage,
     RegisterPage,
-    MenuPage
+    MenuPage,
+    CardapioPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    UserService,
+    CardapioService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
