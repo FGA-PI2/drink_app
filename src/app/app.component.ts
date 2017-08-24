@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
 import { CardapioPage } from '../pages/cardapio/cardapio';
+import { QuerycodePage } from '../pages/querycode/querycode';
 
 @Component({
   templateUrl: 'app.html'

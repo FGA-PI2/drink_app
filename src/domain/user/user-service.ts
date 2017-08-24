@@ -30,4 +30,12 @@ export class UserService {
     console.log('salvando user logado', user);
     this._userLogado = user;
   }
+
+  updateCreditos(creditos, plus){
+    if(plus == true){
+      this._userLogado.creditos += creditos;
+    }else{
+      this._userLogado.creditos -= creditos;
+    }
+  }
 }

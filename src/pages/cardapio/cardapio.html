@@ -8,12 +8,12 @@
 
 <ion-content class="card-background-page">
   <ion-list>
-
-    <ion-card *ngFor="let item of cardapio">
+    <div>
+    <ion-card *ngFor="let item of cardapio" (click)="buyDrink({drink: item})">
       <img class="img-circle" src="{{ item.img }}" style="">
       <div class="card-title">{{ item.nome }}</div>
       <div class="card-subtitle">{{ item.desc }}</div>
-      <div class="card-subtitle-price">R{{ item.preco | currency : 'USD' : true}}</div>
     </ion-card>
+  </div>
   </ion-list>
 </ion-content>

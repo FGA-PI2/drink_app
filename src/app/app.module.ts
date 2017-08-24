@@ -3,14 +3,17 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
+import { DrinkDetailPage } from '../pages/drink-detail/drink-detail';
 import { RegisterPage } from '../pages/register/register';
 import { MenuPage } from '../pages/menu/menu';
 import { CardapioPage } from '../pages/cardapio/cardapio';
 import { UserService } from '../domain/user/user-service';
 import { CardapioService } from '../domain/cardapio/cardapio-service';
+import { QuerycodePage } from '../pages/querycode/querycode';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,14 @@ import { CardapioService } from '../domain/cardapio/cardapio-service';
     LoginPage,
     RegisterPage,
     MenuPage,
-    CardapioPage
+    CardapioPage,
+    DrinkDetailPage,
+    QuerycodePage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -30,7 +36,9 @@ import { CardapioService } from '../domain/cardapio/cardapio-service';
     LoginPage,
     RegisterPage,
     MenuPage,
-    CardapioPage
+    CardapioPage,
+    DrinkDetailPage,
+    QuerycodePage
   ],
   providers: [
     StatusBar,
