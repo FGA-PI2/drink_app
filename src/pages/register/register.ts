@@ -24,18 +24,15 @@ export class RegisterPage {
   registerAccount(){
     let headers = new Headers(
       {
-        'Content-Type' : 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': '*',
+        'Content-Type' : 'application/json',
+        'Access-Control-Allow-Origin': '*'
+
       });
       let options = new RequestOptions({ headers: headers });
 
       let data = JSON.stringify({
         password: "dewewd",
-        username: "ISSO EH UM TESTE",
-        first_name: "Peddwedewro",
-        last_name: "Antonio",
-        email: "pdwede@a.com",
-        date_joined: "2017-08-24T12:33:55.647825Z"});
+        username: "ISSO EH UM TESTE",});
 
         return new Promise((resolve, reject) => {
           this._http.post('https://pi2-api.herokuapp.com/users', data, options)
