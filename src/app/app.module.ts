@@ -14,6 +14,8 @@ import { CardapioPage } from '../pages/cardapio/cardapio';
 import { UserService } from '../domain/user/user-service';
 import { CardapioService } from '../domain/cardapio/cardapio-service';
 import { QuerycodePage } from '../pages/querycode/querycode';
+import { AdminPage } from '../pages/admin/admin';
+import { HomePage } from '../pages/home/home';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { QuerycodePage } from '../pages/querycode/querycode';
     MenuPage,
     CardapioPage,
     DrinkDetailPage,
-    QuerycodePage
+    QuerycodePage,
+    AdminPage,
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,9 @@ import { QuerycodePage } from '../pages/querycode/querycode';
     MenuPage,
     CardapioPage,
     DrinkDetailPage,
-    QuerycodePage
+    QuerycodePage,
+    AdminPage,
+    HomePage
   ],
   providers: [
     StatusBar,

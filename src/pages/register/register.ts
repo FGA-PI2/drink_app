@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { MenuPage } from '../menu/menu';
 import { User } from '../../domain/user/user';
+import { UserService } from '../../domain/user/user-service';
 import {Http ,Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
@@ -16,44 +17,49 @@ import 'rxjs/add/operator/toPromise';
 export class RegisterPage {
 
   public user: User;
+  public loader;
 
-  constructor(public navCtrl: NavController, private _http: Http,){
+  constructor(
+      public navCtrl: NavController,
+      private _http: Http,
+      private _service: UserService,
+      private _loadingCtrl: LoadingController,
+      private _alertCtrl: AlertController){
     this.user = new User();
   }
 
   registerAccount(){
+    this.loader = this._loadingCtrl.create({
+      content: 'Criando sua conta, por favor aguarde...'
+    })
+    this.loader.present()
+    const newUser: User = {
+      password: this.user.password,
+      is_superuser: false,
+      data_nascimento: this.user.data_nascimento,
+      email: this.user.email,
+      creditos: 0
+    };
+    console.log(newUser);
     let headers = new Headers(
       {
         'Content-Type' : 'application/json',
-        'Access-Control-Allow-Origin': '*'
 
       });
       let options = new RequestOptions({ headers: headers });
 
-      let data = JSON.stringify({
-        password: "dewewd",
-        username: "ISSO EH UM TESTE",});
+    this._http.post('https://pi2-api.herokuapp.com/users/', (newUser), options).subscribe(data => {
+      this.loader.dismiss()
+      this._alertCtrl.create({
+        title: 'Uhuu!',
+        buttons: [{text: 'OK', handler: () =>{
+          this._service.saveLoggedUser(newUser);
+          this.navCtrl.push(MenuPage)
+        }}],
+        subTitle: 'Sua conta foi criada com sucesso!'
+      }).present();
 
-        return new Promise((resolve, reject) => {
-          this._http.post('https://pi2-api.herokuapp.com/users', data, options)
-          .toPromise()
-          .then((response) =>
-          {
-            console.log('API Response : ', response.json());
-            resolve(response.json());
-          })
-          .catch((error) =>
-          {
-            console.error('API Error : ', error.status);
-            console.error('API Error : ', JSON.stringify(error));
-            reject(error.json());
-          });
-        });
-      }
-      // console.log(this.user.nome);
-      // console.log(this.user.email);
-      // console.log(this.user.nascimento);
-      // console.log(this.user.senha);
-      // console.log(this.user.senha2);
-      // this.navCtrl.push(MenuPage)
-    }
+      console.log(data);
+    });
+  }
+}

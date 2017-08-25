@@ -4,6 +4,7 @@ import { RegisterPage } from '../register/register'
 import { UserService } from '../../domain/user/user-service';
 import { User } from '../../domain/user/user';
 import { MenuPage } from '../menu/menu';
+import { AdminPage } from '../admin/admin';
 
 @Component({
   selector: 'page-home',
@@ -12,7 +13,7 @@ import { MenuPage } from '../menu/menu';
 export class LoginPage {
 
   public email: String = 'a@a.com';
-  public senha: String = '1234';
+  public password: String = '1234';
   public user: User;
   public loader;
 
@@ -37,8 +38,8 @@ export class LoginPage {
 
       //SIMULATE API DELAY
       setTimeout(()=>{
-        this.user = this._service.getUser();
-        if(this.user.email != this.email || this.user.senha != this.senha){
+        this.user = this._service.getUser(this.email, this.password);
+        if(this.user.email != this.email || this.user.password != this.password){
           this.loader.dismiss()
           this._alertCtrl.create({
             title: 'OPS!',
@@ -46,9 +47,15 @@ export class LoginPage {
             subTitle: 'Email ou senha incorretos!'
           }).present();
         } else {
-          this._service.saveLoggedUser(this.user);
-          this.navCtrl.setRoot(MenuPage)
-          this.loader.dismiss()
+          if(this.user.is_superuser == true){
+            this._service.saveLoggedUser(this.user);
+            this.navCtrl.setRoot(MenuPage)
+            this.loader.dismiss()
+          } else {
+            this._service.saveLoggedUser(this.user);
+            this.navCtrl.setRoot(AdminPage)
+            this.loader.dismiss()
+          }
         }
       }, 800);
     }
