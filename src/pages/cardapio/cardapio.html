@@ -1,11 +1,86 @@
+<ion-header>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="puppies">
+        Cardápio
+      </ion-segment-button>
+      <ion-segment-button value="kittens">
+        Personalizar
+      </ion-segment-button>
+      <ion-segment-button value="ducklings">
+        Meus Drinks
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content class="card-background-page">
-  <ion-list>
-    <div>
-    <ion-card *ngFor="let item of cardapio" (click)="buyDrink({drink: item})">
-      <img class="img-circle" src="{{ item.img }}" style="">
-      <div class="card-title">{{ item.nome }}</div>
-      <div class="card-subtitle">{{ item.desc }}</div>
-    </ion-card>
+
+
+  <div [ngSwitch]="pet">
+    <ion-list *ngSwitchCase="'puppies'">
+      <ion-list>
+        <div>
+          <ion-card *ngFor="let item of cardapio" (click)="detailDrink({drink: item})">
+            <img class="img-circle" src="{{ item.img }}" style="">
+            <div class="card-title">{{ item.nome }}</div>
+            <div class="card-subtitle">{{ item.descricao }}</div>
+          </ion-card>
+        </div>
+      </ion-list>
+    </ion-list>
+
+
+
+    <ion-list *ngSwitchCase="'kittens'">
+      <ion-item>
+        <ion-label>Escolha suas bebidas</ion-label>
+        <ion-select [(ngModel)]="bebidasCustom" multiple="true">
+          <ion-option *ngFor="let item of bebidas">{{item.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="bebidasCustom">
+        <ion-label>Escolha o tamanho</ion-label>
+        <ion-select [(ngModel)]="bebidasCustomSize">
+          <ion-option value="150">Pequeno (150 ml)</ion-option>
+          <ion-option value="250">Médio (250 ml)</ion-option>
+          <ion-option value="350">Grande (350 ml)</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div *ngFor="let bebida of bebidasCustom">
+        <ion-item-divider style="text-align: center;"color="light">{{ bebida }} {{ this.levelvalue[bebida]}}%</ion-item-divider>
+        <ion-item ng-model="levelvalue" >
+          <ion-range [(ngModel)]="levelvalue[bebida]" (ionChange)="validateCustomDrink($event)" min="0" max="100" step="10"  pin="true">
+            <ion-icon range-left small name="wine"></ion-icon>
+            <ion-icon range-right big large name="wine"></ion-icon>
+          </ion-range>
+        </ion-item>
+      </div>
+
+
+
+      <ion-item >
+        <ion-label>Gelo?</ion-label>
+        <ion-toggle checked="false" [(ngModel)]="isToggled"></ion-toggle>
+      </ion-item>
+
+      <ion-item *ngIf="bebidasCustomSize">
+        <h2 style="text-align: center;">Total: R{{ this.totalPrice | currency : 'USD' : true}}!</h2>
+      </ion-item>
+      <button ion-button block (click)="checkoutCustomDrink()">Finalizar Pedido</button>
+    </ion-list>
+
+
+    <ion-list *ngSwitchCase="'ducklings'">
+      <ion-item *ngFor="let qr of _myQrCodes" (click)="callQueryCodeWithString(qr.qr_code)">
+        <ion-thumbnail item-start>
+          <img src="{{ qr.qr_code }}">
+        </ion-thumbnail>
+        <h2>{{ qr.qr_code }}</h2>
+      </ion-item>
+    </ion-list>
   </div>
-  </ion-list>
+
 </ion-content>

@@ -19,51 +19,31 @@
     <img src="{{ drink.img }}"/>
 
     <ion-card-content>
-      <ion-card-title>
+      <ion-card-title style="text-align: center;">
         {{ drink.nome }}
       </ion-card-title>
-      <p>
-        {{ drink.desc }}
+      <p style="text-align: center;">
+        {{ drink.descricao }}
       </p>
       R{{ drink.preco | currency : 'usd' : true }}
     </ion-card-content>
   </ion-card>
-  <ion-list [(ngModel)]="size" radio-group>
-    <ion-list-header>
-      Qual o tamanho da sua bebida?
+  <ion-list>
+    <ion-list-header style="text-align: center;">
+      Defina sua Bebida
     </ion-list-header>
-
+    <ion-item>
+      <ion-label>Escolha o tamanho</ion-label>
+      <ion-select [(ngModel)]="size">
+        <ion-option value="150">Pequeno (150 ml)</ion-option>
+        <ion-option value="250">Médio (250 ml)</ion-option>
+        <ion-option value="350">Grande (350 ml)</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item >
-      <ion-label>Pequena</ion-label>
-      <ion-radio  value="pequena"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Média</ion-label>
-      <ion-radio value="media"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Grande</ion-label>
-      <ion-radio checked="true" value="grande"></ion-radio>
+      <ion-label>Gelo?</ion-label>
+      <ion-toggle checked="false" [(ngModel)]="ice"></ion-toggle>
     </ion-item>
   </ion-list>
-
-  <ion-list [(ngModel)]="ice" radio-group>
-    <ion-list-header>
-      Gostaria de Gelo?
-    </ion-list-header>
-
-    <ion-item>
-      <ion-label>Sim</ion-label>
-      <ion-radio  checked="true" value="sim"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Não</ion-label>
-      <ion-radio value="nao"></ion-radio>
-    </ion-item>
-  </ion-list>
-
-  <button ion-button block (click)="buyDrink(drink)">Finalizar Compra</button>
+  <button ion-button block (click)="checkoutCustomDrink(drink)">Finalizar Compra</button>
 </ion-content>

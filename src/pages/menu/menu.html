@@ -1,5 +1,5 @@
 <ion-content>
-  <h2>Olá {{ loggedUser.nome }}!</h2>
+  <h2>Olá {{ loggedUser.email }}!</h2>
   <h2>Créditos: R{{ loggedUser.creditos | currency : 'USD' : true}}!</h2>
   <ion-tabs>
   <ion-tab [root]="tab1Root" tabTitle="Início" tabIcon="home"></ion-tab>

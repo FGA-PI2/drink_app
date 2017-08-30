@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { MenuPage } from '../../pages/menu/menu';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,8 @@ export class QuerycodePage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+    // this.navCtrl.popToRoot();
+    // this.navCtrl.setRoot(MenuPage);
   }
 
 

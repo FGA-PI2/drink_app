@@ -12,6 +12,7 @@ import { RegisterPage } from '../pages/register/register';
 import { MenuPage } from '../pages/menu/menu';
 import { CardapioPage } from '../pages/cardapio/cardapio';
 import { UserService } from '../domain/user/user-service';
+import { BebidaService } from '../domain/bebida/bebida-service';
 import { CardapioService } from '../domain/cardapio/cardapio-service';
 import { QuerycodePage } from '../pages/querycode/querycode';
 import { AdminPage } from '../pages/admin/admin';
@@ -51,6 +52,7 @@ import { HomePage } from '../pages/home/home';
     SplashScreen,
     UserService,
     CardapioService,
+    BebidaService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

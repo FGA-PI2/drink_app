@@ -1,29 +1,42 @@
 import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import {Http ,Response, Headers, RequestOptions } from '@angular/http';
 import { RegisterPage } from '../register/register'
 import { UserService } from '../../domain/user/user-service';
 import { User } from '../../domain/user/user';
-import { MenuPage } from '../menu/menu';
-import { AdminPage } from '../admin/admin';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { MenuPage } from '../../pages/menu/menu';
+import { AdminPage } from '../../pages/admin/admin';
+
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'login.html'
 })
+
+@Injectable()
 export class LoginPage {
 
-  public email: String = 'a@a.com';
+  public email: String = 'user2@email.com';
   public password: String = '1234';
   public user: User;
   public loader;
+  private _token;
 
 
   constructor(
+    private _http: Http,
     public navCtrl: NavController,
     private _service: UserService,
     private _loadingCtrl: LoadingController,
-    private _alertCtrl: AlertController){
+    private _alertCtrl: AlertController,
+    private splashScreen: SplashScreen){
 
+      this.splashScreen.show();
+
+      this.splashScreen.hide();
 
     }
     register(){
@@ -36,27 +49,60 @@ export class LoginPage {
       })
       this.loader.present()
 
-      //SIMULATE API DELAY
-      setTimeout(()=>{
-        this.user = this._service.getUser(this.email, this.password);
-        if(this.user.email != this.email || this.user.password != this.password){
-          this.loader.dismiss()
-          this._alertCtrl.create({
-            title: 'OPS!',
-            buttons: [{text: 'OK'}],
-            subTitle: 'Email ou senha incorretos!'
-          }).present();
-        } else {
-          if(this.user.is_superuser == true){
-            this._service.saveLoggedUser(this.user);
-            this.navCtrl.setRoot(MenuPage)
-            this.loader.dismiss()
-          } else {
-            this._service.saveLoggedUser(this.user);
-            this.navCtrl.setRoot(AdminPage)
-            this.loader.dismiss()
+      console.log('tentano buscar token de:', this.email, this.password);
+      const newUser = {
+        password: this.password,
+        username: this.email,
+      };
+      let headers = new Headers(
+        {
+          'Content-Type' : 'application/json',
+
+        });
+        let options = new RequestOptions({ headers: headers });
+
+        this._http.post('https://pi2-api.herokuapp.com/api-token-auth/', (newUser), options).subscribe(data => {
+          this._token = (JSON.parse(data['_body'])['token']);
+          console.log('token gerada:', this._token);
+          this._service.saveToken(this._token);
+          this.requestUserWithToken(this.email);
+        });
+      }
+
+
+      requestUserWithToken(emailRequest){
+        console.log('buscando dados do usuario:', emailRequest);
+        let userResponsed: User;
+        let headers = new Headers(
+          {
+            'Content-Type' : 'application/json',
+            'Authorization': this._token
+
+          });
+          let options = new RequestOptions({ headers: headers });
+
+          this._http.get(`https://pi2-api.herokuapp.com/users/?email=${emailRequest}`, options).subscribe(data => {
+            userResponsed = JSON.parse((data['_body']));
+            console.log('Usuario retornado:', userResponsed[0]);
+            if(userResponsed[0].email != emailRequest){
+              this.loader.dismiss()
+              this._alertCtrl.create({
+                title: 'OPS!',
+                buttons: [{text: 'OK'}],
+                subTitle: 'Email ou senha incorretos!'
+              }).present();
+            } else {
+              console.log('sucesso!', userResponsed[0].email);
+              this._service.saveLoggedUser(userResponsed[0]);
+              if(userResponsed[0].is_superuser == true){
+                this.loader.dismiss()
+                this.navCtrl.setRoot(AdminPage)
+                console.log('É ADM');
+              } else {
+                this.loader.dismiss()
+                console.log('NAO É ADM');
+                this.navCtrl.setRoot(MenuPage);
+              }
+            }})
           }
         }
-      }, 800);
-    }
-  }
