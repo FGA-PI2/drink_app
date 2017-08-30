@@ -4,6 +4,7 @@ import { User } from '../../domain/user/user';
 import { UserService } from '../../domain/user/user-service';
 
 @Component({
+  selector: 'page-home',
   templateUrl: 'home.html'
 })
 
