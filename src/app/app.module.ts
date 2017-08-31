@@ -17,6 +17,8 @@ import { CardapioService } from '../domain/cardapio/cardapio-service';
 import { QuerycodePage } from '../pages/querycode/querycode';
 import { AdminPage } from '../pages/admin/admin';
 import { HomePage } from '../pages/home/home';
+import { CreditosPage } from '../pages/creditos/creditos';
+import { Stripe } from '@ionic-native/stripe';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { HomePage } from '../pages/home/home';
     DrinkDetailPage,
     QuerycodePage,
     AdminPage,
-    HomePage
+    HomePage,
+    CreditosPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { HomePage } from '../pages/home/home';
     DrinkDetailPage,
     QuerycodePage,
     AdminPage,
-    HomePage
+    HomePage,
+    CreditosPage
   ],
   providers: [
     StatusBar,
@@ -53,6 +57,7 @@ import { HomePage } from '../pages/home/home';
     UserService,
     CardapioService,
     BebidaService,
+    Stripe,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

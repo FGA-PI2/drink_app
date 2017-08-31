@@ -55,6 +55,10 @@ export class CardapioPage {
       public toastCtrl: ToastController
 
     ) {
+      this.loader = this._loadingCtrl.create({
+        content: 'Carregando...'
+      })
+      this.loader.present()
       this._http
       .get(`https://pi2-api.herokuapp.com/code/?email=${this._userService.getEmailLoggedUser()}`, this.options)
       .map(res => res.json())
@@ -71,6 +75,7 @@ export class CardapioPage {
           this.bebidas = JSON.parse((data['_body']));
           this.levelvalue = [];
           console.log('BEBIDAS MAN:', this.bebidas);
+          this.loader.dismiss()
         })
       })
 

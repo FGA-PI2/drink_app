@@ -5,8 +5,10 @@ import { UserService } from '../../domain/user/user-service';
 import { CardapioPage } from '../cardapio/cardapio';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
+import { CreditosPage } from '../creditos/creditos';
 
 @Component({
+  selector: 'page-menu',
   templateUrl: 'menu.html'
 })
 
@@ -15,7 +17,7 @@ export class MenuPage{
 
   tab1Root = HomePage;
   tab2Root = CardapioPage;
-  tab3Root = CardapioPage;
+  tab3Root = CreditosPage;
   tab4Root = CardapioPage;
   tab5Root = logout;
 
@@ -37,5 +39,6 @@ export class MenuPage{
 export class logout{
   constructor(public navCtrl: NavController){
     this.navCtrl.setRoot(LoginPage)
+    this.navCtrl.popToRoot()
   }
 }
