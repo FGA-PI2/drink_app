@@ -138,6 +138,10 @@ export class CardapioPage {
 
 
     validateCustomDrink(){
+      this.loader = this._loadingCtrl.create({
+        content: 'Processando pagamento...'
+      })
+      this.loader.present()
       this.total = 0;
       for(var bebida in this.levelvalue){
         this.total += this.levelvalue[bebida];
