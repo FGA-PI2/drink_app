@@ -19,11 +19,20 @@ export class UserService {
   public loader;
   private _navCtrl: NavController;
   private _login: LoginPage;
+  public headers = new Headers(
+    {
+      'Content-Type' : 'application/json',
+      'authorization' : this._token
+
+    });
+    public options = new RequestOptions({ headers: this.headers })
+
 
   constructor(
     private _http: Http,
     private _alertCtrl: AlertController,
     private _loadingCtrl: LoadingController){
+
 
       this._user = new User();
       this._userLogado = new User();
@@ -53,10 +62,29 @@ export class UserService {
   }
 
   updateCreditos(creditos, plus){
+    let url = `https://pi2-api.herokuapp.com/users/${this._userLogado.id}/`
     if(plus == true){
-      this._userLogado.creditos += creditos;
+      const cred = {
+        creditos: this._userLogado.creditos + creditos
+      }
+      console.log(JSON.stringify(cred));
+      console.log('A URL É: ', url)
+      this._http.patch(url, cred, this.options).subscribe(data => {
+        console.log(data);
+        this._userLogado.creditos = cred.creditos;
+      });
     }else{
-      this._userLogado.creditos -= creditos;
+      const cred = {
+        creditos: this._userLogado.creditos - creditos
+      }
+      console.log(JSON.stringify(cred));
+      console.log('A URL É: ', url)
+      this._http.patch(url, cred, this.options).subscribe(data => {
+        console.log(data);
+        this._userLogado.creditos = cred.creditos;
+      });
+
+      
     }
   }
 }

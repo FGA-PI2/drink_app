@@ -21,10 +21,10 @@
     <ion-list *ngSwitchCase="'puppies'">
       <ion-list>
         <div>
-          <ion-card *ngFor="let item of cardapio" (click)="detailDrink({drink: item})">
-            <img class="img-circle" src="{{ item.img }}" style="">
+          <ion-card *ngFor="let item of cardapio let i = index" (click)="detailDrink({drink: item, image: images[i]})">
+            <img class="img-circle" src="{{ images[i] }}">
             <div class="card-title">{{ item.nome }}</div>
-            <div class="card-subtitle">{{ item.descricao }}</div>
+            <div class="card-subtitle">{{ item.volume }}ml    R{{ item.preco | currency : 'usd' : true }}</div>
           </ion-card>
         </div>
       </ion-list>

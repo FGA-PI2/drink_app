@@ -13,7 +13,7 @@ import { MenuPage } from '../pages/menu/menu';
 import { CardapioPage } from '../pages/cardapio/cardapio';
 import { UserService } from '../domain/user/user-service';
 import { BebidaService } from '../domain/bebida/bebida-service';
-import { CardapioService } from '../domain/cardapio/cardapio-service';
+import { Cardapio } from '../domain/cardapio/cardapio';
 import { QuerycodePage } from '../pages/querycode/querycode';
 import { AdminPage } from '../pages/admin/admin';
 import { HomePage } from '../pages/home/home';
@@ -55,7 +55,7 @@ import { Stripe } from '@ionic-native/stripe';
     StatusBar,
     SplashScreen,
     UserService,
-    CardapioService,
+    Cardapio,
     BebidaService,
     Stripe,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

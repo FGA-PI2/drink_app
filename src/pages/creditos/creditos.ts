@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { Stripe } from '@ionic-native/stripe';
 
 
@@ -10,10 +10,11 @@ import { Stripe } from '@ionic-native/stripe';
 })
 export class CreditosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private stripe: Stripe) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private stripe: Stripe, private _alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
+    
     this.stripe.setPublishableKey('pk_live_Dih9yyqPB6gXqQ47X2NSt1Iw');
 
 let card = {
@@ -24,8 +25,18 @@ let card = {
 };
 
 this.stripe.createCardToken(card)
-   .then(token => console.log(token))
-   .catch(error => console.error(error));
+   .then(token => this.show(token))
+   .catch(error => this.show(error));
+  }
+
+
+  show(msg){
+    var alert = this._alertCtrl.create({
+      title: 'ATENÇÃO!',
+      subTitle: msg,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

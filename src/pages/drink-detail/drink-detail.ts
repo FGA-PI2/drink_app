@@ -17,6 +17,7 @@ export class DrinkDetailPage {
 
   private _user;
   public drink;
+  public image;
   public loader;
   public size = null;
   public ice = false;
@@ -39,6 +40,7 @@ export class DrinkDetailPage {
     private _http: Http,
     public modalCtrl: ModalController) {
     this.drink = this.navParams.get('drink').drink;
+    this.image = this.navParams.get('drink').image;
   }
 
   dismiss() {
@@ -94,16 +96,6 @@ export class DrinkDetailPage {
   }
 
   checkoutCustomDrink(drink){
-    console.log('1')
-    if(this.size == null){
-      console.log('2')
-      let alert = this._alertCtrl.create({
-        title: 'OPS!',
-        subTitle: 'Você não escolheu o tamanho de sua bebida!',
-        buttons: ['OK']
-      }).present();
-    } else {
-      console.log('3')
       this.loader = this._loadingCtrl.create({
         content: 'Processando pagamento...'
       })
@@ -120,11 +112,11 @@ export class DrinkDetailPage {
           bebidas: drink.nome,
           gelo: this.ice,
           tamanho: drink.size,
-          data: myDate
+          data: myDate,
+          preco: drink.preco
         }
         this.processDrink(drinkJson);
       });
-    }
   }
 
 }

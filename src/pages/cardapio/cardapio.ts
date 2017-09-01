@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, LoadingController, ModalController } from 'ionic-angular';
-import { CardapioService } from '../../domain/cardapio/cardapio-service';
+import { Cardapio } from '../../domain/cardapio/cardapio';
 import { UserService } from '../../domain/user/user-service';
 import { Bebida } from '../../domain/bebida/bebida';
 import { DrinkDetailPage } from '../../pages/drink-detail/drink-detail';
@@ -18,6 +18,7 @@ import { QuerycodePage } from '../../pages/querycode/querycode';
 export class CardapioPage {
 
   private _myQrCodes;
+  public images;
   public total = 0;
   public cardapio;
   private _user;
@@ -45,7 +46,7 @@ export class CardapioPage {
     constructor(
       public navCtrl: NavController,
       public navParams: NavParams,
-      private _cardapioService: CardapioService,
+      private _cardapio: Cardapio,
       private _alertCtrl: AlertController,
       private _loadingCtrl: LoadingController,
       private _userService: UserService,
@@ -55,6 +56,7 @@ export class CardapioPage {
       public toastCtrl: ToastController
 
     ) {
+      this.images = this._cardapio.getImages()
       this.loader = this._loadingCtrl.create({
         content: 'Carregando...'
       })
@@ -81,8 +83,8 @@ export class CardapioPage {
 
     }
 
-    detailDrink(drink){
-      let modal = this.modalCtrl.create(DrinkDetailPage, {'drink': drink});
+    detailDrink(drink, image){
+      let modal = this.modalCtrl.create(DrinkDetailPage, {'drink': drink, 'image':image});
       modal.present();
     }
 
@@ -138,10 +140,6 @@ export class CardapioPage {
 
 
     validateCustomDrink(){
-      this.loader = this._loadingCtrl.create({
-        content: 'Processando pagamento...'
-      })
-      this.loader.present()
       this.total = 0;
       for(var bebida in this.levelvalue){
         this.total += this.levelvalue[bebida];
@@ -149,12 +147,12 @@ export class CardapioPage {
           console.log('PASSOU!');
           this.levelvalue[bebida] -= 10;
         } else if(!this.bebidasCustomSize){
-          let toast = this.toastCtrl.create({
-            message: 'Selecione o tamanho de sua Bebida!',
-            duration: 2000,
-            position: 'Center'
+          let alert = this._alertCtrl.create({
+            title: 'Atenção!',
+            subTitle: 'Selecione o tamanho de sua bebida!!',
+            buttons: ['OK']
           });
-          toast.present(toast);
+          alert.present();
         }
         this.totalPrice = 0;
         for(var preco in this.bebidas){
@@ -184,7 +182,7 @@ export class CardapioPage {
       } else if(this.bebidasCustomSize == null){
         let alert = this._alertCtrl.create({
           title: 'OPS!',
-          subTitle: 'Você não o tamanho do seu drink!',
+          subTitle: 'Você não escolheu o tamanho do seu drink!',
           buttons: ['OK']
         });
         alert.present();
