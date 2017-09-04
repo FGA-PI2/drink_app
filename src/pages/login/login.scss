@@ -1,6 +1,6 @@
 page-home {
   @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
-  .title {
+  .login {
     color:#FFFFFF;
     font-style: italic;
     text-align: center;
@@ -12,6 +12,14 @@ page-home {
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+  }
+
+  .top {
+    color:#FFFFFF;
+    font-style: italic;
+    text-align: center;
+    font-family: 'Permanent Marker', cursive;
+    // font-weight: bold;
   }
 
   .title2 {

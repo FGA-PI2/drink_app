@@ -67,6 +67,13 @@ export class LoginPage {
           console.log('token gerada:', this._token);
           this._service.saveToken(this._token);
           this.requestUserWithToken(this.email);
+        }, err => {
+          this.loader.dismiss()
+          this._alertCtrl.create({
+            title: 'OPS!',
+            buttons: [{text: 'OK'}],
+            subTitle: 'Não foi possível conectar ao servidor!'
+          }).present();
         });
       }
 

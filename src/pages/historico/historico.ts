@@ -19,7 +19,7 @@ import { UserService } from '../../domain/user/user-service';
 
 export class HistoricoPage {
   private _myOrders;
-  private _total = 0;
+  private _total;
   public headers = new Headers(
     {
       'Content-Type': 'application/json',
@@ -35,6 +35,7 @@ ionViewWillEnter(){
     this.loadOrders()
   }
   loadOrders(){
+    this._total = 0;
     this._http
     .get(`https://pi2-api.herokuapp.com/compra/?usuario=${this._userService.getIDLoggedUser()}`, this.options)
     .map(res => res.json())

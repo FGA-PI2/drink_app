@@ -1,7 +1,10 @@
 <ion-header>
-</ion-header>
-<ion-content padding="true">
+    <ion-toolbar>
+      <ion-title class="top">SunBar!</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content padding="true" style="background: url(https://i.pinimg.com/736x/61/78/0a/61780a3f8cbc242e52b589a65a41286e--iphone-backgrounds-tumblr-wallpaper-backgrounds.jpg) no-repeat center;background-size:cover;" >
     <img class="img" style="" src="http://pm1.narvii.com/6535/45fce474e289621991728be8ea7bdbb411a7bcda_128.jpg">
-  <h2 class="title2">Olá {{ loggedUser.email }}!</h2>
+  <h2 class="title2">Olá {{ loggedUser.first_name }}!</h2>
   <h2 class="title2">Créditos: R{{ loggedUser.creditos | currency : 'USD' : true}}!</h2>
 </ion-content>

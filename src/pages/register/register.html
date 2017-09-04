@@ -1,4 +1,4 @@
-<ion-header >
+<ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -7,29 +7,34 @@
 </ion-header>
 
 <ion-content padding>
-    <form (ngSubmit)="registerAccount()">
+  <form (ngSubmit)="registerAccount()">
 
-  <ion-item>
-    <ion-label floating>Email</ion-label>
-    <ion-input [(ngModel)]="user.email" name="email" type="text"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Apelido</ion-label>
+      <ion-input [(ngModel)]="user.first_name" name="first_name" type="text"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Data de Nascimemto</ion-label>
-    <ion-datetime [(ngModel)]="user.data_nascimento" name="data_nascimento" displayFormat="DD/MM/YY"></ion-datetime>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [(ngModel)]="user.email" name="email" type="text"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Senha</ion-label>
-    <ion-input [(ngModel)]="user.password" name="password" type="password"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Data de Nascimemto</ion-label>
+      <ion-datetime [(ngModel)]="user.data_nascimento" name="data_nascimento" displayFormat="DD/MM/YY"></ion-datetime>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Repetir Senha</ion-label>
-    <ion-input [(ngModel)]="user.password2" name="password2" type="password"></ion-input>
-  </ion-item>
-  <button ion-button block type="submit">Criar conta</button>
-</form>
+    <ion-item>
+      <ion-label floating>Senha</ion-label>
+      <ion-input [(ngModel)]="user.password" name="password" type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Repetir Senha</ion-label>
+      <ion-input [(ngModel)]="user.password2" name="password2" type="password"></ion-input>
+    </ion-item>
+    <button ion-button block type="submit">Criar conta</button>
+  </form>
 
 
 </ion-content>

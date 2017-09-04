@@ -34,6 +34,7 @@ export class RegisterPage {
     })
     this.loader.present()
     const newUser: User = {
+      first_name: this.user.first_name,
       password: this.user.password,
       is_superuser: false,
       data_nascimento: this.user.data_nascimento,
