@@ -4,6 +4,7 @@ import { User } from '../../domain/user/user';
 import { UserService } from '../../domain/user/user-service';
 import { CardapioPage } from '../cardapio/cardapio';
 import { HomePage } from '../home/home';
+import { HistoricoPage } from '../historico/historico';
 import { LoginPage } from '../login/login';
 import { CreditosPage } from '../creditos/creditos';
 
@@ -18,7 +19,7 @@ export class MenuPage{
   tab1Root = HomePage;
   tab2Root = CardapioPage;
   tab3Root = CreditosPage;
-  tab4Root = CardapioPage;
+  tab4Root = HistoricoPage;
   tab5Root = logout;
 
   constructor(

@@ -18,6 +18,7 @@ import { QuerycodePage } from '../pages/querycode/querycode';
 import { AdminPage } from '../pages/admin/admin';
 import { HomePage } from '../pages/home/home';
 import { CreditosPage } from '../pages/creditos/creditos';
+import { HistoricoPage } from '../pages/historico/historico';
 import { Stripe } from '@ionic-native/stripe';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { Stripe } from '@ionic-native/stripe';
     QuerycodePage,
     AdminPage,
     HomePage,
-    CreditosPage
+    CreditosPage,
+    HistoricoPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { Stripe } from '@ionic-native/stripe';
     QuerycodePage,
     AdminPage,
     HomePage,
-    CreditosPage
+    CreditosPage,
+    HistoricoPage
   ],
   providers: [
     StatusBar,

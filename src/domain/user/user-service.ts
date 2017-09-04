@@ -47,6 +47,10 @@ export class UserService {
     return this._userLogado.email;
   }
 
+  getIDLoggedUser(){
+    return this._userLogado.id;
+  }
+
   getToken(){
     console.log('buscando token:', this._token);
     return this._token;

@@ -37,6 +37,7 @@ export class LoginPage {
       this.splashScreen.show();
 
       this.splashScreen.hide();
+      console.log(new Date().toISOString())
 
     }
     register(){

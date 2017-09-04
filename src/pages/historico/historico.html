@@ -7,12 +7,25 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>historico</ion-title>
+    <ion-title>Histórico de Compras</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let order of _myOrders">
+      <h2>{{ order.nome }}</h2>
+      <p *ngFor="let qri of order.pedido">{{ qri.porcentagem }}% {{ qri.bebida }}</p>
+      <p style="color:red" ion-button clear item-end>-R{{ order.preco | currency : 'USD' : true}}</p>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Total: -R{{ _total | currency : 'USD' : true}}</ion-title>
+  </ion-toolbar>
+</ion-footer>
