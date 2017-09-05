@@ -1,21 +1,30 @@
+<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+  <div class="flb">
+    <div class="Aligner-item Aligner-item--top"></div>
+    <img src="assets/drink-sun-2.png" style="width: 35%;">
+    <div class="Aligner-item Aligner-item--bottom"></div>
+    <div class="Aligner-item Aligner-item--bottom"></div>
+  </div>
+</div>
+
 <ion-content padding="true" style="background: url(https://i.pinimg.com/originals/73/9e/96/739e96f0224947668029d10ee4fa07ae.jpg) no-repeat center;background-size:cover;" class="has-header">
   <div>
-    <img src="https://image.ibb.co/fipkMk/drink_sun.png" style="display: block; width: 40%; height: auto; margin-left: auto; margin-right: auto;">
+    <img class="animated infinite pulse " src="https://image.ibb.co/fipkMk/drink_sun.png" style="display: block; width: 40%; height: auto; margin-left: auto; margin-right: auto;">
   </div>
   <h2 id="page1-heading1" class="login">SunBar!</h2>
   <form (ngSubmit)="tryLogin()">
     <ion-list>
-      <ion-item style="margin-top: 40px">
+      <ion-item class="animated fadeIn" style="margin-top: 40px">
         <ion-input [(ngModel)]="email" name="email" type="text" placeholder="E-mail:"></ion-input>
       </ion-item>
       <div class="spacer" style="height: 20px;"></div>
-      <ion-item>
+      <ion-item class="animated fadeIn">
         <ion-input class="input" [(ngModel)]="password" name="password" type="password" placeholder="Senha:"></ion-input>
       </ion-item>
       <div class="spacer" style="height: 65px;"></div>
       <div class="spacer" style="height: 10px;"></div>
     </ion-list>
-    <button ion-button round block color="sunbar2" type="submit">Entrar</button>
+    <button class="animated fadeIn" ion-button round block color="sunbar2" type="submit">Entrar</button>
   </form>
-  <button ion-button round block color="sunbar2" (click)="register()">Registrar</button>
+  <button class="animated fadeIn" ion-button round block color="sunbar2" (click)="register()">Registrar</button>
 </ion-content>
