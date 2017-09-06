@@ -55,7 +55,7 @@ export class DrinkDetailPage {
     })
     this._alertCtrl.create({
       title: 'ATENÇÃO!',
-      subTitle: `Deseja comprar ${item.nome} por ${item.preco}?`,
+      subTitle: `Deseja comprar ${item.nome} por R$${item.preco},00?`,
       buttons: [{ text: 'Cancelar' }, {
         text: 'Comprar', handler: () => {
           this.loader.present()

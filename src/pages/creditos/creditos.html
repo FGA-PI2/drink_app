@@ -7,24 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>creditos</ion-title>
+    <ion-title>Comprar Créditos</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
-    <form action="/your-server-side-code" method="POST">
-      <script
-        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="pk_test_l28kPV0vb9qCiZOoVcqOb296"
-        data-amount="999"
-        data-name="Demo Site"
-        data-description="Widget"
-        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-        data-locale="auto">
-      </script>
-    </form>
-
+  <ion-list class="animated bounceInDown">
+    <ion-item-divider style="text-align: center;" color="light">
+      Digite o Valor
+    </ion-item-divider>
+    <div class="spacer" style="height:50px;" id="page-spacer1"></div>
+    <ion-item>
+      <ion-input [(ngModel)]="_credits" type="number" placeholder="R$ 15,00"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button class="animated bounceInUp" ion-button block color="dark" (click)="buyCredits()">Comprar</button>
 </ion-content>

@@ -21,61 +21,66 @@
     <ion-list *ngSwitchCase="'puppies'">
       <ion-list>
         <div>
-          <ion-card  class="animated bounceInLeft" *ngFor="let item of cardapio let i = index" (click)="detailDrink({drink: item, image: images[i]})">
+          <ion-card class="animated bounceInLeft" *ngFor="let item of cardapio let i = index" (click)="detailDrink({drink: item, image: images[i]})">
             <img class="img-circle" src="{{ images[i] }}">
             <div class="card-title">{{ item.nome }}</div>
-            <div class="card-subtitle">{{ item.volume }}ml    R{{ item.preco | currency : 'usd' : true }}</div>
+            <div class="card-subtitle">{{ item.volume }}ml R{{ item.preco | currency : 'usd' : true }}</div>
           </ion-card>
         </div>
       </ion-list>
     </ion-list>
 
 
-
-    <ion-list class="animated bounceInDown" *ngSwitchCase="'kittens'">
-        <ion-item-divider  style="text-align: center;"color="light">
-            Escolha suas bebidas
+    <ion-list *ngSwitchCase="'kittens'">
+      <div class="animated bounceInDown">
+        <ion-item-divider style="text-align: center;" color="light">
+          Escolha suas bebidas
         </ion-item-divider>
-      <ion-item>
-        <ion-label>Bebidas:</ion-label>
-        <ion-select [(ngModel)]="bebidasCustom" multiple="true">
-          <ion-option *ngFor="let item of bebidas">{{item.nome}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item-divider  style="text-align: center;"color="light">
+        <ion-item>
+          <ion-label>Bebidas:</ion-label>
+          <ion-select [(ngModel)]="bebidasCustom" multiple="true">
+            <ion-option *ngFor="let item of bebidas">{{item.nome}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item-divider style="text-align: center;" color="light">
           Escolha o tamanho
-      </ion-item-divider>
-      <ion-item *ngIf="bebidasCustom">
-        <ion-label>Tamanho:</ion-label>
-        <ion-select [(ngModel)]="bebidasCustomSize">
-          <ion-option value="150">Pequeno (150 ml)</ion-option>
-          <ion-option value="250">Médio (250 ml)</ion-option>
-          <ion-option value="350">Grande (350 ml)</ion-option>
-        </ion-select>
-      </ion-item>
+        </ion-item-divider>
+        <ion-item *ngIf="bebidasCustom">
+          <ion-label>Tamanho:</ion-label>
+          <ion-select [(ngModel)]="bebidasCustomSize">
+            <ion-option value="150">Pequeno (150 ml)</ion-option>
+            <ion-option value="250">Médio (250 ml)</ion-option>
+            <ion-option value="350">Grande (350 ml)</ion-option>
+          </ion-select>
+        </ion-item>
 
-      <div *ngFor="let bebida of bebidasCustom">
-        <ion-item-divider *ngIf="bebidasCustomSize" style="text-align: center;"color="light">{{ bebida }} {{ this.levelvalue[bebida]}}%</ion-item-divider>
-        <ion-item ng-model="levelvalue" *ngIf="bebidasCustomSize">
-          <ion-range [(ngModel)]="levelvalue[bebida]" (ionChange)="validateCustomDrink($event)" min="0" max="100" step="10"  pin="true">
-            <ion-icon range-left small name="wine"></ion-icon>
-            <ion-icon range-right big large name="wine"></ion-icon>
-          </ion-range>
+        <div *ngFor="let bebida of bebidasCustom">
+          <ion-item-divider *ngIf="bebidasCustomSize" style="text-align: center;" color="light">{{ bebida }} {{ this.levelvalue[bebida]}}%</ion-item-divider>
+          <ion-item ng-model="levelvalue" *ngIf="bebidasCustomSize">
+            <ion-range [(ngModel)]="levelvalue[bebida]" (ionChange)="validateCustomDrink($event)" min="0" max="100" step="10" pin="true">
+              <ion-icon range-left small name="wine"></ion-icon>
+              <ion-icon range-right big large name="wine"></ion-icon>
+            </ion-range>
+          </ion-item>
+        </div>
+
+
+
+        <ion-item>
+          <ion-label>Gelo?</ion-label>
+          <ion-toggle checked="false" [(ngModel)]="isToggled"></ion-toggle>
+        </ion-item>
+
+        <ion-item *ngIf="bebidasCustomSize">
+          <h2 style="text-align: center;">Total: R{{ this.totalPrice | currency : 'USD' : true}}!</h2>
         </ion-item>
       </div>
+      <ion-footer class="animated bounceInUp">
+        <ion-toolbar>
+          <button ion-button block color="dark" (click)="checkoutCustomDrink()">Finalizar Pedido</button>
+        </ion-toolbar>
+      </ion-footer>
 
-
-
-      <ion-item >
-        <ion-label>Gelo?</ion-label>
-        <ion-toggle checked="false" [(ngModel)]="isToggled"></ion-toggle>
-      </ion-item>
-
-      <ion-item *ngIf="bebidasCustomSize">
-        <h2 style="text-align: center;">Total: R{{ this.totalPrice | currency : 'USD' : true}}!</h2>
-      </ion-item>
-      <button ion-button block color="dark" (click)="checkoutCustomDrink()">Finalizar Pedido</button>
-      
     </ion-list>
 
 

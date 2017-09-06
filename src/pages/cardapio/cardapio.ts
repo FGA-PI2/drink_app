@@ -9,6 +9,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { ToastController } from 'ionic-angular';
 import { QuerycodePage } from '../../pages/querycode/querycode';
 import { MenuPage } from '../../pages/menu/menu';
+import { HomePage } from '../../pages/home/home';
 
 
 @IonicPage()
@@ -151,7 +152,7 @@ export class CardapioPage {
         this.loadQRCode()
         console.log(data);
       });
-      this.navCtrl.push(MenuPage);
+      this.navCtrl.push(HomePage);
     let modal = this.modalCtrl.create(QuerycodePage, { 'string': this.data });
     modal.present();
   }
@@ -164,6 +165,9 @@ export class CardapioPage {
       if (this.total > 100) {
         console.log('PASSOU!');
         this.levelvalue[bebida] -= 10;
+        if(this.levelvalue[bebida] < 0){
+          this.levelvalue[bebida] = 0;
+        }
       } else if (!this.bebidasCustomSize) {
         let alert = this._alertCtrl.create({
           title: 'Atenção!',
