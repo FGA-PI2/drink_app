@@ -94,7 +94,7 @@ export class DrinkDetailPage {
   }
 
   callQueryCode(item) {
-    let json = `{"usuario":"${this._user[0].id}","data_compra":"${item.data}"}`
+    let json = `{"usuario":"${this._user[0].id}","data_compra":"${item.data_compra}"}`
     this.data = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' + json
 
     item.usuario = this._user[0].id,
@@ -102,10 +102,21 @@ export class DrinkDetailPage {
       is_valid: true,
       qr_code: this.data
     }
-
-    console.log(json);
+    let  myOrder = {
+      pedido: item.pedido,
+      qr_code: {
+          is_valid: true,
+          qr_code: this.data,
+          usuario: this._user[0].id
+      },
+      nome: item.nome,
+      gelo: this.ice,
+      data_compra: item.data_compra,
+      usuario: this._user[0].id
+  }
+    console.log('AQUIIIII ',myOrder);
     this._http
-      .post(`https://pi2-api.herokuapp.com/compra/`, item, this.options).subscribe(data => {
+      .post(`http://dev-pi2-api.herokuapp.com/compra/`, myOrder, this.options).subscribe(data => {
         console.log(data);
         let modal = this.modalCtrl.create(QuerycodePage, { 'string': this.data });
         modal.present();
@@ -113,17 +124,18 @@ export class DrinkDetailPage {
   }
 
   checkoutCustomDrink(drink) {
+    console.log('ESSE É O DRINK:', drink)
     this.loader = this._loadingCtrl.create({
       content: 'Processando pagamento...'
     })
     this.loader.present()
     var proporcaoDrink = [];
     for (var i = 0; i < drink.proporcao.length; i++) {
-      let x = { bebida: drink.proporcao[i].bebida, porcentagem: drink.proporcao[i].porcentagem }
+      let x = { bebida: drink.proporcao[i].bebida, volume: drink.proporcao[i].volume }
       proporcaoDrink.push(x)
     }
     this._http
-      .get(`https://pi2-api.herokuapp.com/users/?email=${this._userService.getEmailLoggedUser()}`, this.options)
+      .get(`http://dev-pi2-api.herokuapp.com/users/?email=${this._userService.getEmailLoggedUser()}`, this.options)
       .map(res => res.json())
       .toPromise()
       .then(_user => {

@@ -19,8 +19,8 @@ import { AdminPage } from '../../pages/admin/admin';
 @Injectable()
 export class LoginPage {
 
-  public email: String = 'user2@email.com';
-  public password: String = '1234';
+  public email: String
+  public password: String;
   public user: User;
   public loader;
   private _token;
@@ -62,7 +62,7 @@ export class LoginPage {
       });
     let options = new RequestOptions({ headers: headers });
 
-    this._http.post('https://pi2-api.herokuapp.com/api-token-auth/', (newUser), options).subscribe(data => {
+    this._http.post('http://dev-pi2-api.herokuapp.com/api-token-auth/', (newUser), options).subscribe(data => {
       this._token = (JSON.parse(data['_body'])['token']);
       console.log('token gerada:', this._token);
       this._service.saveToken(this._token);
@@ -89,7 +89,7 @@ export class LoginPage {
       });
     let options = new RequestOptions({ headers: headers });
 
-    this._http.get(`https://pi2-api.herokuapp.com/users/?email=${emailRequest}`, options).subscribe(data => {
+    this._http.get(`http://dev-pi2-api.herokuapp.com/users/?email=${emailRequest}`, options).subscribe(data => {
       userResponsed = JSON.parse((data['_body']));
       console.log('Usuario retornado:', userResponsed[0]);
       if (userResponsed[0].email != emailRequest) {

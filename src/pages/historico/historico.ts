@@ -20,6 +20,7 @@ import { UserService } from '../../domain/user/user-service';
 export class HistoricoPage {
   private _myOrders;
   private _total;
+  private _noOrders = true;
   public headers = new Headers(
     {
       'Content-Type': 'application/json',
@@ -37,14 +38,17 @@ ionViewWillEnter(){
   loadOrders(){
     this._total = 0;
     this._http
-    .get(`https://pi2-api.herokuapp.com/compra/?usuario=${this._userService.getIDLoggedUser()}`, this.options)
+    .get(`http://dev-pi2-api.herokuapp.com/compra/?usuario__id=${this._userService.getIDLoggedUser()}`, this.options)
     .map(res => res.json())
     .toPromise()
     .then(_myOrders => {
+      this._noOrders = false;
       this._myOrders = _myOrders
       for(var i = 0; i<this._myOrders.length; i++){
         this._total += this._myOrders[i].preco;
-      }      
+      }
+      if (this._total > 0) {
+      }
     });
   }
 

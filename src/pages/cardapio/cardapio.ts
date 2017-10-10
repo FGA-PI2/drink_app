@@ -36,7 +36,7 @@ export class CardapioPage {
   public isToggled;
   public totalCustomDrink = 0;
   private _toast;
-  public bebidasCustomSize = null;
+  public bebidasCustomSize = 300;
   public totalPrice = 0;
   public drinks = [];
   public headers = new Headers(
@@ -67,10 +67,10 @@ export class CardapioPage {
     this.loader.present()
 
     this.loadQRCode()
-    this._http.get(`https://pi2-api.herokuapp.com/drink/`, this.options).subscribe(data => {
+    this._http.get(`http://dev-pi2-api.herokuapp.com/drink/`, this.options).subscribe(data => {
       this.cardapio = JSON.parse((data['_body']));
       console.log('Drinks:', this.cardapio);
-      this._http.get(`https://pi2-api.herokuapp.com/bebida/`, this.options).subscribe(data => {
+      this._http.get(`http://dev-pi2-api.herokuapp.com/bebida/`, this.options).subscribe(data => {
         this.bebidas = JSON.parse((data['_body']));
         this.levelvalue = [];
         console.log('BEBIDAS MAN:', this.bebidas);
@@ -133,22 +133,24 @@ export class CardapioPage {
 
   callQueryCode(item) {
     let data = new Date().toISOString()
-    let json = `{"usuario":"${this._user[0].id}","data_compra":${data}}`
+    let json = `{"usuario__id":"${this._user[0].id}","data_compra":"${data}"}`
     this.data = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' + json
     let myOrder = {
       pedido: this.drinks,
       qr_code: {
         is_valid: true,
-        qr_code: this.data,
+        qr_code: `${this.data}`,
+        usuario: this._user[0].id,
+      
       },
       usuario: this._user[0].id,
       gelo: item.gelo,
       data_compra: data,
       preco: this.totalPrice
     }
-    console.log((myOrder));
+    
     this._http
-      .post(`https://pi2-api.herokuapp.com/compra/`, myOrder, this.options).subscribe(data => {
+      .post(`http://dev-pi2-api.herokuapp.com/compra/`, myOrder, this.options).subscribe(data => {
         this.loadQRCode()
         console.log(data);
       });
@@ -168,13 +170,6 @@ export class CardapioPage {
         if(this.levelvalue[bebida] < 0){
           this.levelvalue[bebida] = 0;
         }
-      } else if (!this.bebidasCustomSize) {
-        let alert = this._alertCtrl.create({
-          title: 'Atenção!',
-          subTitle: 'Selecione o tamanho de sua bebida!!',
-          buttons: ['OK']
-        });
-        alert.present();
       }
       this.totalPrice = 0;
       for (var preco in this.bebidas) {
@@ -221,12 +216,22 @@ export class CardapioPage {
       })
       this.loader.present()
       for (var index in Object.keys(this.levelvalue)) {
-        let pedido = {
+        var exists = false;
+        var pedido = {
           bebida: Object.keys(this.levelvalue)[index],
-          porcentagem: (<any>Object).values(this.levelvalue)[index]
+          volume: (<any>Object).values(this.levelvalue)[index]
         }
-        this.drinks.push(pedido);
+        for (var i=0; i < this.drinks.length; i++) {
+          if (this.drinks[i].bebida === pedido.bebida) {
+              this.drinks[i].volume = pedido.volume
+              exists = true
+          }
+        }
+        if(exists == false){
+          this.drinks.push(pedido);
+        }
       }
+      console.log('AQUI O PEDIDO:', pedido)
       this.drinks
       var drinkJson = {
         preco: this.totalPrice,
@@ -234,7 +239,7 @@ export class CardapioPage {
         tamanho: this.bebidasCustomSize
       }
       this._http
-        .get(`https://pi2-api.herokuapp.com/users/?email=${this._userService.getEmailLoggedUser()}`, this.options)
+        .get(`http://dev-pi2-api.herokuapp.com/users/?email=${this._userService.getEmailLoggedUser()}`, this.options)
         .map(res => res.json())
         .toPromise()
         .then(_user => {
@@ -262,7 +267,7 @@ export class CardapioPage {
 
   loadQRCode(){
     this._http
-    .get(`https://pi2-api.herokuapp.com/compra/?usuario=${this._userService.getIDLoggedUser()}`, this.options)
+    .get(`http://dev-pi2-api.herokuapp.com/compra/?usuario__id=${this._userService.getIDLoggedUser()}`, this.options)
     .map(res => res.json())
     .toPromise()
     .then(_myQrCodes => {

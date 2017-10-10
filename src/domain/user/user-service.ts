@@ -67,7 +67,7 @@ export class UserService {
 
   updateCreditos(creditos, plus){
     console.log('novo: ', Number(creditos), 'antigo: ', typeof(this._userLogado.creditos));
-    let url = `https://pi2-api.herokuapp.com/users/${this._userLogado.id}/`
+    let url = `http://dev-pi2-api.herokuapp.com/users/${this._userLogado.id}/`
     if(plus == true){
       this.loader = this._loadingCtrl.create({
         content: 'Processando...'

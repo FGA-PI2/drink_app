@@ -15,6 +15,7 @@
 
 <ion-content padding>
   <ion-list >
+    <h2 *ngIf="_noOrders" style="text-align: center;">Você não possui histórico de compras!</h2>
     <ion-item class="animated bounceInUp" *ngFor="let order of _myOrders">
       <h2>{{ order.nome }}</h2>
       <p *ngFor="let qri of order.pedido">{{ qri.porcentagem }}% {{ qri.bebida }}</p>
@@ -26,6 +27,6 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-title>Total: -R{{ _total | currency : 'USD' : true}}</ion-title>
+    <ion-title *ngIf="!_noOrders" >Total: -R{{ _total | currency : 'USD' : true}}</ion-title>
   </ion-toolbar>
 </ion-footer>

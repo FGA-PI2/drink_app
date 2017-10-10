@@ -17,6 +17,7 @@ import 'rxjs/add/operator/toPromise';
 export class RegisterPage {
 
   public user: User;
+  public password2;
   public loader;
 
   constructor(
@@ -49,13 +50,18 @@ export class RegisterPage {
       });
       let options = new RequestOptions({ headers: headers });
 
-    this._http.post('https://pi2-api.herokuapp.com/users/', (newUser), options).subscribe(data => {
+    this._http.post('http://dev-pi2-api.herokuapp.com/users/', (newUser), options).subscribe(data => {
       this.loader.dismiss()
       this._alertCtrl.create({
         title: 'Uhuu!',
         buttons: [{text: 'OK', handler: () =>{
           this._service.saveLoggedUser(newUser);
-          this.navCtrl.push(MenuPage)
+          this.user.first_name = ''
+          this.user.data_nascimento = ''
+          this.user.email = ''
+          this.user.password = ''
+          this.password2 = ''
+
         }}],
         subTitle: 'Sua conta foi criada com sucesso!'
       }).present();
