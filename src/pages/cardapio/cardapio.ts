@@ -36,7 +36,7 @@ export class CardapioPage {
   public isToggled;
   public totalCustomDrink = 0;
   private _toast;
-  public bebidasCustomSize = 300;
+  public bebidasCustomSize = 400;
   public totalPrice = 0;
   public drinks = [];
   public headers = new Headers(
@@ -133,7 +133,7 @@ export class CardapioPage {
 
   callQueryCode(item) {
     let data = new Date().toISOString()
-    let json = `{"usuario__id":"${this._user[0].id}","data_compra":"${data}"}`
+    let json = `{"usuario":"${this._user[0].id}","data_compra":"${data}"}`
     this.data = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' + json
     let myOrder = {
       pedido: this.drinks,
@@ -218,10 +218,10 @@ export class CardapioPage {
         var exists = false;
         var pedido = {
           bebida_name: Object.keys(this.levelvalue)[index],
-          volume: (<any>Object).values(this.levelvalue)[index]
+          volume: (((<any>Object).values(this.levelvalue)[index] *this.bebidasCustomSize) / 100)
         }
         for (var i=0; i < this.drinks.length; i++) {
-          if (this.drinks[i].bebida === pedido.bebida_name) {
+          if (this.drinks[i].bebida_name === pedido.bebida_name) {
               this.drinks[i].volume = pedido.volume
               exists = true
           }
