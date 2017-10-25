@@ -146,9 +146,8 @@ export class CardapioPage {
       usuario: this._user[0].id,
       gelo: item.gelo,
       data_compra: data,
-      preco: this.totalPrice
     }
-    
+    console.log('AHAHAHA', JSON.stringify(myOrder))
     this._http
       .post(`http://dev-pi2-api.herokuapp.com/compra/`, myOrder, this.options).subscribe(data => {
         this.loadQRCode()
@@ -218,11 +217,11 @@ export class CardapioPage {
       for (var index in Object.keys(this.levelvalue)) {
         var exists = false;
         var pedido = {
-          bebida: Object.keys(this.levelvalue)[index],
+          bebida_name: Object.keys(this.levelvalue)[index],
           volume: (<any>Object).values(this.levelvalue)[index]
         }
         for (var i=0; i < this.drinks.length; i++) {
-          if (this.drinks[i].bebida === pedido.bebida) {
+          if (this.drinks[i].bebida === pedido.bebida_name) {
               this.drinks[i].volume = pedido.volume
               exists = true
           }
@@ -267,11 +266,11 @@ export class CardapioPage {
 
   loadQRCode(){
     this._http
-    .get(`http://dev-pi2-api.herokuapp.com/compra/?usuario__id=${this._userService.getIDLoggedUser()}`, this.options)
+    .get(`http://dev-pi2-api.herokuapp.com/compra/?usuario=${this._userService.getIDLoggedUser()}`, this.options)
     .map(res => res.json())
     .toPromise()
     .then(_myQrCodes => {
-      this._myQrCodes = _myQrCodes
+      this._myQrCodes = _myQrCodes.reverse()
       console.log('RETORNEI ISSO: ', this._myQrCodes);
     });
   }

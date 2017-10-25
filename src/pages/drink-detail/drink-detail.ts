@@ -131,7 +131,7 @@ export class DrinkDetailPage {
     this.loader.present()
     var proporcaoDrink = [];
     for (var i = 0; i < drink.proporcao.length; i++) {
-      let x = { bebida: drink.proporcao[i].bebida, volume: drink.proporcao[i].volume }
+      let x = { bebida_name: drink.proporcao[i].bebida, volume: drink.proporcao[i].volume }
       proporcaoDrink.push(x)
     }
     this._http

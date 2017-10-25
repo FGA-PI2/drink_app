@@ -38,12 +38,12 @@ ionViewWillEnter(){
   loadOrders(){
     this._total = 0;
     this._http
-    .get(`http://dev-pi2-api.herokuapp.com/compra/?usuario__id=${this._userService.getIDLoggedUser()}`, this.options)
+    .get(`http://dev-pi2-api.herokuapp.com/compra/?usuario=${this._userService.getIDLoggedUser()}`, this.options)
     .map(res => res.json())
     .toPromise()
     .then(_myOrders => {
       this._noOrders = false;
-      this._myOrders = _myOrders
+      this._myOrders = _myOrders.reverse()
       for(var i = 0; i<this._myOrders.length; i++){
         this._total += this._myOrders[i].preco;
       }

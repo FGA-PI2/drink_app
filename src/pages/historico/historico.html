@@ -18,7 +18,7 @@
     <h2 *ngIf="_noOrders" style="text-align: center;">Você não possui histórico de compras!</h2>
     <ion-item class="animated bounceInUp" *ngFor="let order of _myOrders">
       <h2>{{ order.nome }}</h2>
-      <p *ngFor="let qri of order.pedido">{{ qri.porcentagem }}% {{ qri.bebida }}</p>
+      <p *ngFor="let qri of order.pedido">{{ qri.volume }}% {{ qri.bebida_name }}</p>
       <p style="color:red" ion-button clear item-end>-R{{ order.preco | currency : 'USD' : true}}</p>
     </ion-item>
   </ion-list>
