@@ -19,7 +19,7 @@ import { AdminPage } from '../pages/admin/admin';
 import { HomePage } from '../pages/home/home';
 import { CreditosPage } from '../pages/creditos/creditos';
 import { HistoricoPage } from '../pages/historico/historico';
-import { Stripe } from '@ionic-native/stripe';
+import { PayPal } from '@ionic-native/paypal';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { Stripe } from '@ionic-native/stripe';
     AdminPage,
     HomePage,
     CreditosPage,
-    HistoricoPage
+    HistoricoPage,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +60,7 @@ import { Stripe } from '@ionic-native/stripe';
     UserService,
     Cardapio,
     BebidaService,
-    Stripe,
+    PayPal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

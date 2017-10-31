@@ -20,8 +20,8 @@
     </ion-item-divider>
     <div class="spacer" style="height:50px;" id="page-spacer1"></div>
     <ion-item>
-      <ion-input [(ngModel)]="_credits" type="number" placeholder="R$ 15,00"></ion-input>
+      <ion-input [(ngModel)]="payment.amount" type="number" placeholder="R$ 15,00"></ion-input>
     </ion-item>
   </ion-list>
-  <button class="animated bounceInUp" ion-button block color="dark" (click)="buyCredits()">Comprar</button>
+  <button class="animated bounceInUp" ion-button block color="dark" (click)="makePayment()">Comprar</button>
 </ion-content>
