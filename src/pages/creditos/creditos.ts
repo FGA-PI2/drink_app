@@ -12,7 +12,6 @@ export class CreditosPage {
 
   private _credits: number;
 	payment: PayPalPayment = new PayPalPayment('', 'BRL', 'Credits', 'sale');
-	currencies = ['EUR', 'USD'];
 	payPalEnvironment: string = 'payPalEnvironmentSandbox';
   constructor(private payPal: PayPal, public navCtrl: NavController, public navParams: NavParams, private _userService: UserService, private _alertCtrl: AlertController) {
   }
