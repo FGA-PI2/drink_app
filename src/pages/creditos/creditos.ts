@@ -28,6 +28,9 @@ export class CreditosPage {
   }
 
   makePayment2() {
+		let x = (parseFloat(this.payment.amount) / 3.266)
+		this.payment.amount = String(x)
+		console.log(x)
 		this.payPal.init({
 			PayPalEnvironmentProduction: '',
 			PayPalEnvironmentSandbox: 'Abg4jwlPdVrJLFe13_sOUtuLVUH5RT78ns_OuJemwAR6PqPC8aSBBZ9crxbpJIgd_61515Vwwy5b6VG5'
