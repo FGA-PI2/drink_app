@@ -42,6 +42,23 @@ export class RegisterPage {
       email: this.user.email,
       creditos: 0
     };
+
+    if(this.user.password != this.password2){
+      this.loader.dismiss()
+      this._alertCtrl.create({
+        title: 'ERRO!',
+        buttons: [{text: 'OK', handler: () =>{
+          this._service.saveLoggedUser(newUser);
+          this.user.first_name = ''
+          this.user.data_nascimento = ''
+          this.user.email = ''
+          this.user.password = ''
+          this.password2 = ''
+
+        }}],
+        subTitle: 'As senhas não conferem!'
+      }).present();
+    }
     console.log(newUser);
     let headers = new Headers(
       {
