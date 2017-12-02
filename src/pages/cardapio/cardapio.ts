@@ -67,16 +67,7 @@ export class CardapioPage {
     this.loader.present()
 
     this.loadQRCode()
-    this._http.get(`http://dev-pi2-api.herokuapp.com/drink/`, this.options).subscribe(data => {
-      this.cardapio = JSON.parse((data['_body']));
-      console.log('Drinks:', this.cardapio);
-      this._http.get(`http://dev-pi2-api.herokuapp.com/bebida/`, this.options).subscribe(data => {
-        this.bebidas = JSON.parse((data['_body']));
-        this.levelvalue = [];
-        console.log('BEBIDAS MAN:', this.bebidas);
-        this.loader.dismiss()
-      })
-    })
+    this.loadAll()
 
   }
 
@@ -273,6 +264,25 @@ export class CardapioPage {
       this._myQrCodes = _myQrCodes.reverse()
       console.log('RETORNEI ISSO: ', this._myQrCodes);
     });
+  }
+
+  doRefresh(refresher) {
+    this.loadQRCode()
+    this.loadAll()
+    refresher.complete();
+  }
+
+  loadAll(){
+    this._http.get(`http://dev-pi2-api.herokuapp.com/drink/`, this.options).subscribe(data => {
+      this.cardapio = JSON.parse((data['_body']));
+      console.log('Drinks:', this.cardapio);
+      this._http.get(`http://dev-pi2-api.herokuapp.com/bebida/`, this.options).subscribe(data => {
+        this.bebidas = JSON.parse((data['_body']));
+        this.levelvalue = [];
+        console.log('BEBIDAS MAN:', this.bebidas);
+        this.loader.dismiss()
+      })
+    })
   }
 
 }

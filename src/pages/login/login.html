@@ -1,11 +1,4 @@
-<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
-  <div class="flb">
-    <div class="Aligner-item Aligner-item--top"></div>
-    <img src="assets/drink-sun-2.png" style="width: 35%;">
-    <div class="Aligner-item Aligner-item--bottom"></div>
-    <div class="Aligner-item Aligner-item--bottom"></div>
-  </div>
-</div>
+
 
 <ion-content padding="true" style="background: url(https://i.pinimg.com/originals/73/9e/96/739e96f0224947668029d10ee4fa07ae.jpg) no-repeat center;background-size:cover;" class="has-header">
   <div>
@@ -27,39 +20,4 @@
     <button class="animated fadeIn" ion-button round block color="sunbar2" type="submit">Entrar</button>
   </form>
   <button class="animated fadeIn" ion-button round block color="sunbar2" (click)="register()">Registrar</button>
-  
-  <button id="paypal-button"></button>
-  
-  <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-  
-  <script>
-      var CREATE_PAYMENT_URL  = 'http://127.0.0.1:5000/payment';
-      var EXECUTE_PAYMENT_URL = 'http://127.0.0.1:5000/execute';
-  
-      paypal.Button.render({
-  
-          env: 'sandbox', // Or 'sandbox'
-  
-          commit: true, // Show a 'Pay Now' button
-  
-          payment: function() {
-              return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
-                  return data.paymentID;
-              });
-          },
-  
-          onAuthorize: function(data) {
-              return paypal.request.post(EXECUTE_PAYMENT_URL, {
-                  paymentID: data.paymentID,
-                  payerID:   data.payerID
-              }).then(function(res) {
-  
-                  console.log(res.success)
-                  // The payment is complete!
-                  // You can now show a confirmation message to the customer
-              });
-          }
-  
-      }, '#paypal-button');
-  </script>
 </ion-content>

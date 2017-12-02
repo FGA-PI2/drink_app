@@ -7,13 +7,14 @@ import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
 import { CardapioPage } from '../pages/cardapio/cardapio';
 import { QuerycodePage } from '../pages/querycode/querycode';
+import { TutorialPage } from '../pages/tutorial/tutorial';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = LoginPage;
+  rootPage = TutorialPage;
 
   public paginas = [
     {titulo: "Cardápio", componente: CardapioPage},

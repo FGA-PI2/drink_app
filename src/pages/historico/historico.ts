@@ -52,4 +52,9 @@ ionViewWillEnter(){
     });
   }
 
+  doRefresh(refresher) {
+    this.loadOrders()
+    refresher.complete();
+  }
+
 }

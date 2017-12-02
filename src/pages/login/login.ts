@@ -24,7 +24,7 @@ export class LoginPage {
   public user: User;
   public loader;
   private _token;
-  splash = true;
+  
 
   constructor(
     private _http: Http,
@@ -113,10 +113,6 @@ export class LoginPage {
         }
       }
     })
-  }
-
-  ionViewDidLoad() {
-    setTimeout(() => this.splash = false, 4000);
   }
 
 

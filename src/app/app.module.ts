@@ -19,6 +19,7 @@ import { AdminPage } from '../pages/admin/admin';
 import { HomePage } from '../pages/home/home';
 import { CreditosPage } from '../pages/creditos/creditos';
 import { HistoricoPage } from '../pages/historico/historico';
+import { TutorialPage } from '../pages/tutorial/tutorial';
 import { PayPal } from '@ionic-native/paypal';
 
 @NgModule({
@@ -34,6 +35,7 @@ import { PayPal } from '@ionic-native/paypal';
     HomePage,
     CreditosPage,
     HistoricoPage,
+    TutorialPage,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { PayPal } from '@ionic-native/paypal';
     AdminPage,
     HomePage,
     CreditosPage,
-    HistoricoPage
+    HistoricoPage,
+    TutorialPage
   ],
   providers: [
     StatusBar,
